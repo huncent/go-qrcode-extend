@@ -5,8 +5,7 @@ import (
 	"image"
 	"image/png"
 
-	qrcode "github.com/kolonse/go-qrcode"
-	//	qrcode "github.com/skip2/go-qrcode"
+	qrcode "github.com/huncent/go-qrcode"
 )
 
 type QRDiy struct {
@@ -15,11 +14,12 @@ type QRDiy struct {
 
 func (q *QRDiy) Encode() ([]byte, error) {
 	var code *qrcode.QRCode
-	//	code, err := qrcode.New(q.Arg.content, q.Arg.level)
-	code, err := qrcode.NewWithColor(q.Arg.Content, q.Arg.level, q.Arg.bgcolor, q.Arg.forecolor)
+	code, err := qrcode.New(q.Arg.Content, q.Arg.level)
 	if err != nil {
 		return nil, err
 	}
+	code.BackgroundColor = q.Arg.bgcolor
+	code.ForegroundColor = q.Arg.forecolor
 	var img image.Image
 	if q.Arg.bdmaxsize <= 0 {
 		img = code.Image(q.Arg.size)

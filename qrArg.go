@@ -1,13 +1,14 @@
 package qrcodee_xtend
 
 import (
+	"fmt"
 	"image"
 	"image/color"
+	_ "image/jpeg"
 	"net/http"
 	"strconv"
 
-	qrcode "github.com/kolonse/go-qrcode"
-	//	qrcode "github.com/skip2/go-qrcode"
+	qrcode "github.com/huncent/go-qrcode"
 )
 
 type QRArg struct {
@@ -115,6 +116,7 @@ func (q *QRArg) downImg(str string) image.Image {
 	defer resp.Body.Close()
 	logo, _, err := image.Decode(resp.Body)
 	if err != nil {
+		fmt.Println("imagedecode", err.Error())
 		return nil
 	}
 	return logo
