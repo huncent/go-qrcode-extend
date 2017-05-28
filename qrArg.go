@@ -1,9 +1,9 @@
 package qrcodee_xtend
 
 import (
-	"fmt"
 	"image"
 	"image/color"
+	_ "image/gif"
 	_ "image/jpeg"
 	"net/http"
 	"strconv"
@@ -116,7 +116,6 @@ func (q *QRArg) downImg(str string) image.Image {
 	defer resp.Body.Close()
 	logo, _, err := image.Decode(resp.Body)
 	if err != nil {
-		fmt.Println("imagedecode", err.Error())
 		return nil
 	}
 	return logo

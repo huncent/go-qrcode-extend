@@ -5,6 +5,8 @@ import (
 	"image"
 	"image/png"
 
+	"github.com/disintegration/imaging"
+
 	qrcode "github.com/huncent/go-qrcode"
 )
 
@@ -31,8 +33,11 @@ func (q *QRDiy) Encode() ([]byte, error) {
 		q.embgimg(img, q.Arg.bgimg)
 	}
 	if q.Arg.logo != nil {
-		q.emlogo(img, q.Arg.logo)
+		logosize := q.Arg.size / 5
+		logo := imaging.Resize(q.Arg.logo, logosize, logosize, imaging.Lanczos)
+		q.emlogo(img, logo)
 	}
+
 	var b bytes.Buffer
 	err = png.Encode(&b, img)
 	if err != nil {
