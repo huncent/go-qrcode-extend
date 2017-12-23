@@ -13,6 +13,7 @@ import (
 
 type QRArg struct {
 	Content   string
+	bianhao   string
 	size      int
 	bgcolor   color.Color
 	forecolor color.Color
@@ -29,6 +30,7 @@ type Values interface {
 func (q *QRArg) Parse(query Values) {
 	q.Content = query.Get("content")
 	q.size = q.parseSize(query.Get("size"))
+	q.bianhao = query.Get("bianhao")
 	q.bgcolor = q.parseBGColor(query.Get("bgcolor"))
 	q.forecolor = q.parseForeColor(query.Get("forecolor"))
 	q.logo = q.parseLogo(query.Get("logo"))
